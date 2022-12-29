@@ -47,9 +47,17 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
         $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.winterMarketUser.token;
     }
 
-    $scope.loadProducts = function () {
-        $http.get('http://localhost:5555/core/api/v1/products').then(function (response) {
-            $scope.productsList = response.data;
+    const contextPath = 'http://localhost:5555/core/';
+    $scope.loadProducts = function (pageIndex = 1) {
+        $http({
+            url: contextPath + 'api/v1/products',
+            method: 'GET',
+            params: {
+                p: pageIndex
+            }
+        }).then(function (response) {
+            $scope.productsPage = response.data;
+            $scope.generatePagesList($scope.productsPage.totalPages);
         });
     }
 
@@ -89,6 +97,16 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
             $scope.cart = response.data;
         });
     }
+
+    $scope.generatePagesList = function (totalPages) {
+        out = [];
+        for (let i = 0; i < totalPages; i++) {
+            out.push(i + 1);
+        }
+        $scope.pagesList = out;
+    }
+
+
 
     $scope.loadProducts();
     $scope.loadCart();
