@@ -9,6 +9,7 @@ import ru.geekbrains.winter.market.core.entities.OrderItem;
 import ru.geekbrains.winter.market.core.integrations.CartServiceIntegration;
 import ru.geekbrains.winter.market.core.repositories.OrderRepository;
 
+import java.math.BigDecimal;
 import java.util.stream.Collectors;
 
 @Service

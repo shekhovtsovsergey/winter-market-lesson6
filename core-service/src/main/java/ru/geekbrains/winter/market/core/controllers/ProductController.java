@@ -1,11 +1,13 @@
 package ru.geekbrains.winter.market.core.controllers;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.winter.market.api.ProductDto;
 import ru.geekbrains.winter.market.api.ResourceNotFoundException;
 import ru.geekbrains.winter.market.core.converters.ProductConverter;
 import ru.geekbrains.winter.market.core.entities.Product;
+import ru.geekbrains.winter.market.core.repositories.ProductRepository;
 import ru.geekbrains.winter.market.core.services.ProductService;
 
 import java.util.List;
@@ -14,12 +16,15 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/products")
 @RequiredArgsConstructor
+@Slf4j
 public class ProductController {
+    private final ProductRepository productRepository;
     private final ProductService productService;
     private final ProductConverter productConverter;
 
     @GetMapping
     public List<ProductDto> findAllProducts() {
+        log.error("Внимание");
         return productService.findAll().stream().map(productConverter::entityToDto).collect(Collectors.toList());
     }
 

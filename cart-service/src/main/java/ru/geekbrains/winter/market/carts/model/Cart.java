@@ -3,6 +3,8 @@ package ru.geekbrains.winter.market.carts.model;
 import lombok.Data;
 import ru.geekbrains.winter.market.api.ProductDto;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.List;
 @Data
 public class Cart {
     private List<CartItem> items;
-    private int totalPrice;
+    private BigDecimal totalPrice;
 
     public Cart() {
         this.items = new ArrayList<>();
@@ -40,13 +42,13 @@ public class Cart {
 
     public void clear() {
         items.clear();
-        totalPrice = 0;
+        totalPrice = BigDecimal.ZERO;
     }
 
     private void recalculate() {
-        totalPrice = 0;
+        totalPrice = BigDecimal.ZERO;
         for (CartItem item : items) {
-            totalPrice += item.getPrice();
+           totalPrice  =  totalPrice.add(item.getPrice()).setScale(2, RoundingMode.HALF_UP);
         }
     }
 }

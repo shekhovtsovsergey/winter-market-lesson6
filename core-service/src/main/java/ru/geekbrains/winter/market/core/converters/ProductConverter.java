@@ -8,6 +8,8 @@ import ru.geekbrains.winter.market.core.entities.Category;
 import ru.geekbrains.winter.market.core.entities.Product;
 import ru.geekbrains.winter.market.core.services.CategoryService;
 
+import java.math.BigDecimal;
+
 @Component
 @RequiredArgsConstructor
 public class ProductConverter {

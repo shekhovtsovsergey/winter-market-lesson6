@@ -8,6 +8,7 @@ import ru.geekbrains.winter.market.core.entities.Category;
 import ru.geekbrains.winter.market.core.entities.Product;
 import ru.geekbrains.winter.market.core.repositories.ProductRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
